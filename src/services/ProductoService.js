@@ -1,19 +1,5 @@
-const initProductos = [
-    { id: 1, nombre: 'Huawei P30 Pro', precio: 2010.99 },
-    { id: 2, nombre: 'Asus VivoBook', precio: 19000.99 },
-    { id: 3, nombre: 'Dell Vostro 3500', precio: 9000.49 },
-    { id: 4, nombre: 'Maple Bacon Jerky', precio: 6.99 },
-    { id: 5, nombre: 'Compact Hair Dryer', precio: 29.99 },
-    { id: 6, nombre: 'Pet First Aid Kit', precio: 29.99 },
-    { id: 7, nombre: 'Gardening Gloves with Claws', precio: 24.99 },
-    { id: 8, nombre: 'Smartphone Projector Kit', precio: 24.99 },
-    { id: 9, nombre: 'Mini Food Processor', precio: 39.99 },
-    { id: 10, nombre: 'Portable Pet Water Bottle', precio: 18.99 },
-    { id: 11, nombre: 'Lemon Zest Olive Oil', precio: 8.99 },
-    { id: 12, nombre: 'Electric Stir Fry Pan', precio: 49.99 },
-    { id: 13, nombre: 'Reusable Produce Bags Set', precio: 14.99 },
-]
+import { generateFakeData } from "./DataFakerService";
 
 export const listProductos = () => {
-    return initProductos;
+    return generateFakeData(10); // Genera 10 productos falsos cada vez que se llama a la función
 }           
