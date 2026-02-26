@@ -1,14 +1,22 @@
 import { useEffect, useState } from "react";
+//import Swal from "sweetalert2";
 import { listProductos } from '../services/ProductoService';
 
 export const ProductoApp = () => {
 
     const [ productos, setProductos ] = useState([]);
 
+    //Swal.showLoading();
+
     useEffect(() => {
-        setProductos(listProductos());
+        setProductos(listProductos());        
     }, []);
 
+    /* Swal.fire({
+        title: 'Productos cargados exitosamente',
+        allowOutsideClick: false,        
+    }); */
+    
     return (
         <>
             <div className="container mt-4 mb-4">
