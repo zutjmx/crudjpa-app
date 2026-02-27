@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 //import Swal from "sweetalert2";
 import { listProductos } from '../services/ProductoService';
+import { ProductoGrid } from "./ProductoGrid";
 
 export const ProductoApp = () => {
 
@@ -24,26 +25,7 @@ export const ProductoApp = () => {
                     <div className="card-body">
                         <h2 className="card-title">Productos</h2>
                         <h4 className="card-subtitle mb-2 text-body-secondary">Lista de productos disponibles</h4>            
-                        <table className="table table-striped">
-                            <thead>
-                                <tr>
-                                    <th>ID</th>
-                                    <th>Nombre</th>
-                                    <th>Precio</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {productos.map(producto => (
-                                        <tr key={producto.id}>
-                                            <td>{producto.id}</td>
-                                            <td>{producto.nombre}</td>
-                                            <td>${producto.precio}</td>
-                                        </tr>
-                                    )
-                                )
-                                }
-                            </tbody>
-                        </table>
+                        <ProductoGrid productos={productos} />
                     </div>
                 </div>
             </div>
