@@ -1,3 +1,5 @@
+import PropTypes from "prop-types";
+
 export const ProductoDetalle = ({ producto = {} }) => {
   return (
     <tr key={producto.id}>
@@ -7,3 +9,7 @@ export const ProductoDetalle = ({ producto = {} }) => {
     </tr>  
   );
 }
+
+ProductoDetalle.propTypes = {
+    producto: PropTypes.object.isRequired
+};

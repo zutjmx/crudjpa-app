@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import { ProductoDetalle } from "./ProductoDetalle";
 
 export const ProductoGrid = ({ productos = [] }) => {
@@ -20,3 +21,7 @@ export const ProductoGrid = ({ productos = [] }) => {
     </table>
   );
 }
+
+ProductoGrid.propTypes = {
+    productos: PropTypes.array.isRequired
+};
