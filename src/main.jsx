@@ -5,6 +5,6 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <ProductoApp />
+    <ProductoApp titulo="Productos" subtitulo="Lista de productos disponibles" />
   </StrictMode>,
 )
