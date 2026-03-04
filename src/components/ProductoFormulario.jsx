@@ -1,4 +1,5 @@
 import { useState } from "react";
+import Swal from "sweetalert2";
 
 const initialFormData = {
     nombreProducto: '',
@@ -22,7 +23,21 @@ export const ProductoFormulario = () => {
 
     return (
         <div className="container mb-4">            
-            <form>
+            <form className="card" onSubmit={(e) => {
+                e.preventDefault();
+                
+                if (!nombreProducto || !descripcionProducto || !precioProducto) {
+                    Swal.fire({
+                        title: 'Error en el formulario',
+                        text: 'Todos los campos son obligatorios',
+                        icon: 'error',
+                        confirmButtonText: 'Aceptar'
+                    });
+                    return;
+                }
+
+                console.log(formData);
+            }}>
                 <div className="mb-3">
                     {/* <label htmlFor="nombreProducto" className="form-label">Nombre del Producto</label> */}
                     <input 
