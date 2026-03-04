@@ -21,11 +21,10 @@ export const ProductoFormulario = () => {
     };
 
     return (
-        <div className="d-flex justify-content-end">
-            <h1>Formulario de Producto</h1>
+        <div className="container mb-4">            
             <form>
                 <div className="mb-3">
-                    <label for="nombreProducto" className="form-label">Nombre del Producto</label>
+                    {/* <label htmlFor="nombreProducto" className="form-label">Nombre del Producto</label> */}
                     <input 
                         type="text" 
                         className="form-control" 
@@ -37,7 +36,7 @@ export const ProductoFormulario = () => {
                     />                    
                 </div>
                 <div className="mb-3">
-                    <label for="descripcionProducto" className="form-label">Descripción del Producto</label>
+                    {/* <label htmlFor="descripcionProducto" className="form-label">Descripción del Producto</label> */}
                     <input 
                         type="text" 
                         className="form-control" 
@@ -50,7 +49,7 @@ export const ProductoFormulario = () => {
                     />                    
                 </div>
                 <div className="mb-3">
-                    <label for="precioProducto" className="form-label">Precio del Producto</label>
+                    {/* <label htmlFor="precioProducto" className="form-label">Precio del Producto</label> */}
                     <input 
                         type="number" 
                         className="form-control" 
@@ -61,7 +60,7 @@ export const ProductoFormulario = () => {
                         onChange={handleChange}
                     />
                 </div>                                
-                <button type="submit" className="btn btn-primary">Enviar</button>
+                <button type="submit" className="btn btn-primary">Crear</button>
             </form>
         </div>        
     );
