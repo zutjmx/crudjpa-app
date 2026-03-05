@@ -7,7 +7,7 @@ const initialFormData = {
     precioProducto: ''
 };
 
-export const ProductoFormulario = () => {
+export const ProductoFormulario = ({onAgregarProducto}) => {
     
     const [formData, setFormData] = useState(initialFormData);
 
@@ -21,23 +21,35 @@ export const ProductoFormulario = () => {
         }));
     };
 
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        if (!nombreProducto || !descripcionProducto || !precioProducto) {
+            Swal.fire({
+                title: 'Error en el formulario',
+                text: 'Todos los campos son obligatorios',
+                icon: 'error',
+                confirmButtonText: 'Aceptar'
+            });
+            return;
+        }
+        console.log('Datos del formulario:', formData);
+
+        // Aquí puedes agregar la lógica para enviar los datos al backend o realizar otras acciones necesarias
+        onAgregarProducto(formData);
+        Swal.fire({
+            title: 'Producto agregado exitosamente',
+            text: `El producto "${nombreProducto}" ha sido agregado.`,
+            icon: 'success',
+            confirmButtonText: 'Aceptar'
+        });
+
+        // Reiniciar el formulario después de enviar los datos
+        setFormData(initialFormData);
+    }
+
     return (
         <div className="container mb-4">            
-            <form className="card" onSubmit={(e) => {
-                e.preventDefault();
-                
-                if (!nombreProducto || !descripcionProducto || !precioProducto) {
-                    Swal.fire({
-                        title: 'Error en el formulario',
-                        text: 'Todos los campos son obligatorios',
-                        icon: 'error',
-                        confirmButtonText: 'Aceptar'
-                    });
-                    return;
-                }
-
-                console.log(formData);
-            }}>
+            <form className="card" onSubmit={handleSubmit}>
                 <div className="mb-3">
                     {/* <label htmlFor="nombreProducto" className="form-label">Nombre del Producto</label> */}
                     <input 

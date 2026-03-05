@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 //import Swal from "sweetalert2";
-import { listProductos } from '../services/ProductoService';
+import { listProductos,generaNumeroAleatorio } from '../services/ProductoService';
 import { ProductoGrid } from "./ProductoGrid";
 import { ProductoFormulario } from "./ProductoFormulario";
 
@@ -19,6 +19,23 @@ export const ProductoApp = ({titulo='', subtitulo=''}) => {
         title: 'Productos cargados exitosamente',
         allowOutsideClick: false,        
     }); */
+
+    const handlerAgregarProducto = (producto) => {
+        // Aquí puedes agregar la lógica para agregar el producto a tu lista o realizar otras acciones necesarias
+        const { nombreProducto, descripcionProducto, precioProducto } = producto;
+
+        const nuevoProducto = {
+            id: generaNumeroAleatorio(100, 500), // Genera de manera temporal un ID aleatorio para el nuevo producto
+            nombre: nombreProducto,
+            descripcion: descripcionProducto,
+            precio: parseFloat(precioProducto)
+        };
+
+        console.log('Producto con ID:', nuevoProducto);
+
+        setProductos([...productos, {...nuevoProducto}]);
+        
+    }
     
     return (
         <>
@@ -27,7 +44,7 @@ export const ProductoApp = ({titulo='', subtitulo=''}) => {
                     <div className="card-body">
                         <h5 className="card-title">Formulario de Producto</h5>
                         <h6 className="card-subtitle mb-2 text-body-secondary">Agregar Producto</h6>                                    
-                        <ProductoFormulario />
+                        <ProductoFormulario onAgregarProducto={handlerAgregarProducto} />
                     </div>
                 </div>                
                 <div className="card">
