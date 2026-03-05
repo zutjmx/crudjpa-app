@@ -4,6 +4,7 @@ import PropTypes from "prop-types";
 import { listProductos,generaNumeroAleatorio } from '../services/ProductoService';
 import { ProductoGrid } from "./ProductoGrid";
 import { ProductoFormulario } from "./ProductoFormulario";
+import Swal from "sweetalert2";
 
 export const ProductoApp = ({titulo='', subtitulo=''}) => {
 
@@ -36,6 +37,28 @@ export const ProductoApp = ({titulo='', subtitulo=''}) => {
         setProductos([...productos, {...nuevoProducto}]);
         
     }
+
+    const handlerEliminarProducto = (id) => {
+        Swal.fire({
+            title: '¿Estás seguro?',
+            text: "¡No podrás revertir esto!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Sí, eliminarlo!',
+            cancelButtonText: 'Cancelar'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                const productosActualizados = productos.filter(producto => producto.id !== id);
+                setProductos(productosActualizados);
+                Swal.fire('¡Eliminado!',
+                    'El producto ha sido eliminado.',
+                    'success'
+                );
+            }
+        });
+    }
     
     return (
         <>
@@ -51,7 +74,7 @@ export const ProductoApp = ({titulo='', subtitulo=''}) => {
                     <div className="card-body">
                         <h2 className="card-title">{titulo}</h2>
                         <h4 className="card-subtitle mb-2 text-body-secondary">{subtitulo}</h4>                                    
-                        <ProductoGrid productos={productos} />
+                        <ProductoGrid productos={productos} onBorrarProducto={handlerEliminarProducto} />
                     </div>
                 </div>
             </div>                        

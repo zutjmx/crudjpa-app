@@ -1,15 +1,21 @@
 import PropTypes from "prop-types";
 
-export const ProductoDetalle = ({ producto = {} }) => {
+export const ProductoDetalle = ({ producto = {}, onBorrar }) => {
   return (
     <tr key={producto.id}>
         <td>{producto.id}</td>
         <td>{producto.nombre}</td>
         <td>${producto.precio}</td>
+        <td>
+            <button className="btn btn-danger" onClick={() => onBorrar(producto.id)}>
+                Eliminar
+            </button>
+        </td>
     </tr>  
   );
 }
 
 ProductoDetalle.propTypes = {
-    producto: PropTypes.object.isRequired
+    producto: PropTypes.object.isRequired,
+    onBorrar: PropTypes.func.isRequired
 };
