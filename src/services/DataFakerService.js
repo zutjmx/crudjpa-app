@@ -1,4 +1,4 @@
-import {fakerES_MX} from '@faker-js/faker';
+import {de, fakerES_MX} from '@faker-js/faker';
 
 export const generateFakeData = (numItems) => {
     const fakeData = [];
@@ -6,6 +6,7 @@ export const generateFakeData = (numItems) => {
         fakeData.push({
             id: i + 1,
             nombre: fakerES_MX.commerce.productName(),
+            descripcion: fakerES_MX.commerce.productDescription(),
             precio: parseFloat(fakerES_MX.commerce.price()),
         });
     }
