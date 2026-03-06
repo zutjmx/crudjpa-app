@@ -1,4 +1,4 @@
-import {de, fakerES_MX} from '@faker-js/faker';
+import { fakerES_MX} from '@faker-js/faker';
 
 export const generateFakeData = (numItems) => {
     const fakeData = [];

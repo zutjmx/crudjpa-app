@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
 import PropTypes from "prop-types";
-//import Swal from "sweetalert2";
 import { listProductos,generaNumeroAleatorio } from '../services/ProductoService';
 import { ProductoGrid } from "./ProductoGrid";
 import { ProductoFormulario } from "./ProductoFormulario";
 import Swal from "sweetalert2";
+import { el } from "@faker-js/faker";
 
 export const ProductoApp = ({titulo='', subtitulo=''}) => {
 
@@ -17,31 +17,37 @@ export const ProductoApp = ({titulo='', subtitulo=''}) => {
         precioProducto: ''
     });
 
-    //Swal.showLoading();
-
     useEffect(() => {
         setProductos(listProductos());        
     }, []);
 
-    /* Swal.fire({
-        title: 'Productos cargados exitosamente',
-        allowOutsideClick: false,        
-    }); */
-
     const handlerAgregarProducto = (producto) => {
         // Aquí puedes agregar la lógica para agregar el producto a tu lista o realizar otras acciones necesarias
-        const { nombreProducto, descripcionProducto, precioProducto } = producto;
+        const {id, nombreProducto, descripcionProducto, precioProducto } = producto;
 
-        const nuevoProducto = {
-            id: generaNumeroAleatorio(100, 500), // Genera de manera temporal un ID aleatorio para el nuevo producto
-            nombre: nombreProducto,
-            descripcion: descripcionProducto,
-            precio: parseFloat(precioProducto)
-        };
+        let nuevoProducto = {};
+        if (!id) {
+            nuevoProducto = {
+                id: generaNumeroAleatorio(100, 500), // Genera de manera temporal un ID aleatorio para el nuevo producto
+                nombre: nombreProducto,
+                descripcion: descripcionProducto,
+                precio: parseFloat(precioProducto)
+            };
+        } else {
+            nuevoProducto.id = id;
+            nuevoProducto.nombre = nombreProducto;
+            nuevoProducto.descripcion = descripcionProducto;
+            nuevoProducto.precio = parseFloat(precioProducto);
+        }
 
         console.log('Producto con ID:', nuevoProducto);
 
-        setProductos([...productos, {...nuevoProducto}]);
+        if (!id) {
+            setProductos([...productos, nuevoProducto]);
+            return;
+        }
+
+        setProductos(productos.map(producto => producto.id === id ? nuevoProducto : producto));
         
     }
 

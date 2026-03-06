@@ -11,11 +11,12 @@ export const ProductoFormulario = ({onAgregarProducto, productoSelected}) => {
     
     const [formData, setFormData] = useState(initialFormData);
 
-    const { nombreProducto, descripcionProducto, precioProducto } = formData;
+    const {id, nombreProducto, descripcionProducto, precioProducto } = formData;
 
     useEffect(() => {
         if (productoSelected && productoSelected.id) {
             setFormData({
+                id: productoSelected.id,
                 nombreProducto: productoSelected.nombre || '',
                 descripcionProducto: productoSelected.descripcion || '',
                 precioProducto: productoSelected.precio || ''
@@ -60,8 +61,7 @@ export const ProductoFormulario = ({onAgregarProducto, productoSelected}) => {
     return (
         <div className="container mb-4">            
             <form className="card" onSubmit={handleSubmit}>
-                <div className="mb-3">
-                    {/* <label htmlFor="nombreProducto" className="form-label">Nombre del Producto</label> */}
+                <div className="mb-3">                    
                     <input 
                         type="text" 
                         className="form-control" 
@@ -72,8 +72,7 @@ export const ProductoFormulario = ({onAgregarProducto, productoSelected}) => {
                         onChange={handleChange}
                     />                    
                 </div>
-                <div className="mb-3">
-                    {/* <label htmlFor="descripcionProducto" className="form-label">Descripción del Producto</label> */}
+                <div className="mb-3">                    
                     <input 
                         type="text" 
                         className="form-control" 
@@ -85,8 +84,7 @@ export const ProductoFormulario = ({onAgregarProducto, productoSelected}) => {
 
                     />                    
                 </div>
-                <div className="mb-3">
-                    {/* <label htmlFor="precioProducto" className="form-label">Precio del Producto</label> */}
+                <div className="mb-3">                    
                     <input 
                         type="number" 
                         className="form-control" 
@@ -97,7 +95,7 @@ export const ProductoFormulario = ({onAgregarProducto, productoSelected}) => {
                         onChange={handleChange}
                     />
                 </div>                                
-                <button type="submit" className="btn btn-primary">Crear</button>
+                <button type="submit" className="btn btn-primary">Guardar</button>
             </form>
         </div>        
     );
