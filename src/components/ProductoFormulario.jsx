@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Swal from "sweetalert2";
 
 const initialFormData = {
@@ -7,11 +7,21 @@ const initialFormData = {
     precioProducto: ''
 };
 
-export const ProductoFormulario = ({onAgregarProducto}) => {
+export const ProductoFormulario = ({onAgregarProducto, productoSelected}) => {
     
     const [formData, setFormData] = useState(initialFormData);
 
     const { nombreProducto, descripcionProducto, precioProducto } = formData;
+
+    useEffect(() => {
+        if (productoSelected && productoSelected.id) {
+            setFormData({
+                nombreProducto: productoSelected.nombre || '',
+                descripcionProducto: productoSelected.descripcion || '',
+                precioProducto: productoSelected.precio || ''
+            });
+        }
+    }, [productoSelected]);
 
     const handleChange = (e) => {
         const { name, value } = e.target;

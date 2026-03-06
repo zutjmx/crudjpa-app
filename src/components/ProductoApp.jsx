@@ -86,7 +86,10 @@ export const ProductoApp = ({titulo='', subtitulo=''}) => {
                     <div className="card-body">
                         <h5 className="card-title">Formulario de Producto</h5>
                         <h6 className="card-subtitle mb-2 text-body-secondary">Agregar Producto</h6>                                    
-                        <ProductoFormulario onAgregarProducto={handlerAgregarProducto} />
+                        <ProductoFormulario 
+                            onAgregarProducto={handlerAgregarProducto}
+                            productoSelected={productoSelected} 
+                        />
                     </div>
                 </div>                
                 <div className="card">
