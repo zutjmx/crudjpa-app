@@ -10,6 +10,13 @@ export const ProductoApp = ({titulo='', subtitulo=''}) => {
 
     const [ productos, setProductos ] = useState([]);
 
+    const [productoSelected, setProductoSelected] = useState({
+        id: '',
+        nombreProducto: '',
+        descripcionProducto: '',
+        precioProducto: ''
+    });
+
     //Swal.showLoading();
 
     useEffect(() => {
@@ -59,6 +66,18 @@ export const ProductoApp = ({titulo='', subtitulo=''}) => {
             }
         });
     }
+
+    const handlerSeleccionarProducto = (id) => {
+        const productoSeleccionado = productos.find(producto => producto.id === id);
+        setProductoSelected(productoSeleccionado);
+        console.log('Producto seleccionado con ID:', id);
+        console.log('Datos del producto seleccionado',productoSeleccionado);
+    }
+
+    const handlerEditarProducto = (id) => {
+        // Aquí puedes agregar la lógica para editar el producto en tu lista o realizar otras acciones necesarias
+        console.log('Producto a editar con ID:', id);
+    }
     
     return (
         <>
@@ -74,7 +93,11 @@ export const ProductoApp = ({titulo='', subtitulo=''}) => {
                     <div className="card-body">
                         <h2 className="card-title">{titulo}</h2>
                         <h4 className="card-subtitle mb-2 text-body-secondary">{subtitulo}</h4>                                    
-                        <ProductoGrid productos={productos} onBorrarProducto={handlerEliminarProducto} />
+                        <ProductoGrid 
+                            productos={productos} 
+                            onBorrarProducto={handlerEliminarProducto} 
+                            onSeleccionarProducto={handlerSeleccionarProducto}                            
+                        />
                     </div>
                 </div>
             </div>                        

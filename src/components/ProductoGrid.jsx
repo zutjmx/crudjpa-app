@@ -1,7 +1,7 @@
 import PropTypes from "prop-types";
 import { ProductoDetalle } from "./ProductoDetalle";
 
-export const ProductoGrid = ({ productos = [], onBorrarProducto }) => {
+export const ProductoGrid = ({ productos = [], onBorrarProducto, onSeleccionarProducto }) => {
   return (
     <table className="table table-striped">
         <thead>
@@ -9,12 +9,18 @@ export const ProductoGrid = ({ productos = [], onBorrarProducto }) => {
                 <th>ID</th>
                 <th>Nombre</th>
                 <th>Precio</th>
-                <th>Acciones</th>
+                <th>Editar</th>
+                <th>Borrar</th>
             </tr>
         </thead>
         <tbody>
             {productos.map(producto => (
-                    <ProductoDetalle key={producto.id} producto={producto} onBorrar={onBorrarProducto} />
+                    <ProductoDetalle 
+                        key={producto.id} 
+                        producto={producto} 
+                        onBorrar={onBorrarProducto} 
+                        onSeleccionar={onSeleccionarProducto} 
+                    />
                 )
             )
             }
@@ -24,5 +30,7 @@ export const ProductoGrid = ({ productos = [], onBorrarProducto }) => {
 }
 
 ProductoGrid.propTypes = {
-    productos: PropTypes.array.isRequired
+    productos: PropTypes.array.isRequired,
+    onBorrarProducto: PropTypes.func.isRequired,
+    onSeleccionarProducto: PropTypes.func.isRequired
 };
