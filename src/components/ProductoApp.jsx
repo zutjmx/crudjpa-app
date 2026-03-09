@@ -104,7 +104,7 @@ export const ProductoApp = ({titulo='', subtitulo=''}) => {
                         <h4 className="card-subtitle mb-2 text-body-secondary">{subtitulo}</h4>                                    
                         
                         {productos.length === 0 ? (
-                            <p className="text-center">No hay productos disponibles.</p>
+                            <p className="text-center alert alert-info">No hay productos disponibles.</p>
                         ) : (
                             <ProductoGrid 
                                 productos={productos} 
