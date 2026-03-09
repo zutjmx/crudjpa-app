@@ -48,8 +48,8 @@ export const ProductoFormulario = ({onAgregarProducto, productoSelected}) => {
         // Aquí puedes agregar la lógica para enviar los datos al backend o realizar otras acciones necesarias
         onAgregarProducto(formData);
         Swal.fire({
-            title: 'Producto agregado exitosamente',
-            text: `El producto "${nombreProducto}" ha sido agregado.`,
+            title: 'Producto guardado exitosamente',
+            text: `El producto "${nombreProducto}" ha sido guardado.`,
             icon: 'success',
             confirmButtonText: 'Aceptar'
         });
