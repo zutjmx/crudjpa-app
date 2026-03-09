@@ -102,11 +102,16 @@ export const ProductoApp = ({titulo='', subtitulo=''}) => {
                     <div className="card-body">
                         <h2 className="card-title">{titulo}</h2>
                         <h4 className="card-subtitle mb-2 text-body-secondary">{subtitulo}</h4>                                    
-                        <ProductoGrid 
-                            productos={productos} 
-                            onBorrarProducto={handlerEliminarProducto} 
-                            onSeleccionarProducto={handlerSeleccionarProducto}                            
-                        />
+                        
+                        {productos.length === 0 ? (
+                            <p className="text-center">No hay productos disponibles.</p>
+                        ) : (
+                            <ProductoGrid 
+                                productos={productos} 
+                                onBorrarProducto={handlerEliminarProducto} 
+                                onSeleccionarProducto={handlerSeleccionarProducto}                            
+                            />
+                        )}
                     </div>
                 </div>
             </div>                        
