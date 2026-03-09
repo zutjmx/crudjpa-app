@@ -9,6 +9,7 @@ export const ProductoGrid = ({ productos = [], onBorrarProducto, onSeleccionarPr
                 <th>ID</th>
                 <th>Nombre</th>
                 <th>Descripción</th>
+                <th>SKU</th>
                 <th>Precio</th>
                 <th>Editar</th>
                 <th>Borrar</th>

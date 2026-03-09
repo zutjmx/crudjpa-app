@@ -12,6 +12,16 @@ export const listProductos = async () => {
     }
 }
 
+export const createProducto = async (producto) => {
+    try {
+        const response = await axios.post(API_BASE_URL, producto);
+        return response.data;
+    } catch (error) {
+        console.error('Error creating producto:', error);
+        throw error;
+    }
+}
+
 export const generaNumeroAleatorio = (min, max) => {
     return Math.floor(Math.random() * (max - min + 1)) + min;
 }

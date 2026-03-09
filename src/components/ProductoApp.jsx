@@ -13,7 +13,8 @@ export const ProductoApp = ({titulo='', subtitulo=''}) => {
         id: '',
         nombreProducto: '',
         descripcionProducto: '',
-        precioProducto: ''
+        precioProducto: '',
+        skuProducto: ''
     });
 
     const getProductos = async () => {
@@ -43,7 +44,7 @@ export const ProductoApp = ({titulo='', subtitulo=''}) => {
 
     const handlerAgregarProducto = (producto) => {
         // Aquí puedes agregar la lógica para agregar el producto a tu lista o realizar otras acciones necesarias
-        const {id, nombreProducto, descripcionProducto, precioProducto } = producto;
+        const {id, nombreProducto, descripcionProducto, precioProducto, skuProducto } = producto;
 
         let nuevoProducto = {};
         if (!id) {
@@ -51,13 +52,15 @@ export const ProductoApp = ({titulo='', subtitulo=''}) => {
                 id: generaNumeroAleatorio(100, 500), // Genera de manera temporal un ID aleatorio para el nuevo producto
                 nombre: nombreProducto,
                 descripcion: descripcionProducto,
-                precio: parseFloat(precioProducto)
+                precio: parseFloat(precioProducto),
+                sku: skuProducto
             };
         } else {
             nuevoProducto.id = id;
             nuevoProducto.nombre = nombreProducto;
             nuevoProducto.descripcion = descripcionProducto;
             nuevoProducto.precio = parseFloat(precioProducto);
+            nuevoProducto.sku = skuProducto;
         }
 
         console.log('Producto con ID:', nuevoProducto);

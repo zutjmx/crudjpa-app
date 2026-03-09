@@ -4,14 +4,15 @@ import Swal from "sweetalert2";
 const initialFormData = {
     nombreProducto: '',
     descripcionProducto: '',
-    precioProducto: ''
+    precioProducto: '',
+    skuProducto: ''
 };
 
 export const ProductoFormulario = ({onAgregarProducto, productoSelected}) => {
     
     const [formData, setFormData] = useState(initialFormData);
 
-    const {id, nombreProducto, descripcionProducto, precioProducto } = formData;
+    const {id, nombreProducto, descripcionProducto, precioProducto, skuProducto } = formData;
 
     useEffect(() => {
         if (productoSelected && productoSelected.id) {
@@ -19,7 +20,8 @@ export const ProductoFormulario = ({onAgregarProducto, productoSelected}) => {
                 id: productoSelected.id,
                 nombreProducto: productoSelected.nombre || '',
                 descripcionProducto: productoSelected.descripcion || '',
-                precioProducto: productoSelected.precio || ''
+                precioProducto: productoSelected.precio || '',
+                skuProducto: productoSelected.sku || ''
             });
         }
     }, [productoSelected]);
@@ -83,6 +85,18 @@ export const ProductoFormulario = ({onAgregarProducto, productoSelected}) => {
                         onChange={handleChange}
 
                     />                    
+                </div>
+                <div className="mb-3">                    
+                    <input 
+                        type="text" 
+                        className="form-control" 
+                        id="skuProducto" 
+                        name="skuProducto" 
+                        placeholder="SKU del producto"
+                        value={skuProducto}
+                        onChange={handleChange}
+
+                    />
                 </div>
                 <div className="mb-3">                    
                     <input 

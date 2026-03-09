@@ -8,7 +8,12 @@ export const generateFakeData = (numItems) => {
             nombre: fakerES_MX.commerce.productName(),
             descripcion: fakerES_MX.commerce.productDescription(),
             precio: parseFloat(fakerES_MX.commerce.price()),
+            sku: fakerES_MX.random.alphaNumeric(8).toUpperCase(),
         });
     }
     return fakeData;
+}
+
+export const generaFakeSku = () => {
+    return fakerES_MX.random.alphaNumeric(8).toUpperCase();
 }

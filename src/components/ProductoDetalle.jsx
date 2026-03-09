@@ -6,6 +6,7 @@ export const ProductoDetalle = ({ producto = {}, onBorrar, onSeleccionar }) => {
         <td>{producto.id}</td>
         <td>{producto.nombre}</td>
         <td>{producto.descripcion}</td>
+        <td>{producto.sku}</td>
         <td>${producto.precio}</td>
         <td>
             <button className="btn btn-warning" onClick={() => onSeleccionar(producto.id)}>
