@@ -1,8 +1,16 @@
-import { generateFakeData } from "./DataFakerService";
+import axios from 'axios';
 
-export const listProductos = () => {
-    return generateFakeData(10); // Genera 10 productos falsos cada vez que se llama a la función
-}           
+const API_BASE_URL = 'http://localhost:8080/productos';
+
+export const listProductos = async () => {
+    try {
+        const response = await axios.get(API_BASE_URL);
+        return response.data;
+    } catch (error) {
+        console.error('Error fetching productos:', error);
+        throw error;
+    }
+}
 
 export const generaNumeroAleatorio = (min, max) => {
     return Math.floor(Math.random() * (max - min + 1)) + min;

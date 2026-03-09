@@ -4,7 +4,6 @@ import { listProductos,generaNumeroAleatorio } from '../services/ProductoService
 import { ProductoGrid } from "./ProductoGrid";
 import { ProductoFormulario } from "./ProductoFormulario";
 import Swal from "sweetalert2";
-import { el } from "@faker-js/faker";
 
 export const ProductoApp = ({titulo='', subtitulo=''}) => {
 
@@ -17,8 +16,29 @@ export const ProductoApp = ({titulo='', subtitulo=''}) => {
         precioProducto: ''
     });
 
+    const getProductos = async () => {
+        try {
+            Swal.fire({
+                title: 'Cargando productos...',
+                allowOutsideClick: false,
+                didOpen: () => {
+                    Swal.showLoading();
+                }
+            });
+            
+            const productosData = await listProductos();
+            console.log("productosData:",productosData);
+            setProductos(productosData._embedded.productoes);
+            
+            Swal.close();
+        } catch (error) {
+            console.error('Error fetching productos:', error);
+            Swal.fire('Error', 'Error al cargar los productos', 'error');
+        }
+    }
+
     useEffect(() => {
-        setProductos(listProductos());        
+        getProductos();
     }, []);
 
     const handlerAgregarProducto = (producto) => {
