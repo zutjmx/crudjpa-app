@@ -1,6 +1,12 @@
 import { useEffect, useState } from "react";
 import PropTypes from "prop-types";
-import { listProductos,generaNumeroAleatorio } from '../services/ProductoService';
+import { 
+    listProductos, 
+    generaNumeroAleatorio, 
+    createProducto, 
+    updateProducto, 
+    deleteProducto 
+} from '../services/ProductoService';
 import { ProductoGrid } from "./ProductoGrid";
 import { ProductoFormulario } from "./ProductoFormulario";
 import Swal from "sweetalert2";
@@ -42,36 +48,28 @@ export const ProductoApp = ({titulo='', subtitulo=''}) => {
         getProductos();
     }, []);
 
-    const handlerAgregarProducto = (producto) => {
-        // Aquí puedes agregar la lógica para agregar el producto a tu lista o realizar otras acciones necesarias
-        const {id, nombreProducto, descripcionProducto, precioProducto, skuProducto } = producto;
-
-        let nuevoProducto = {};
-        if (!id) {
-            nuevoProducto = {
-                id: generaNumeroAleatorio(100, 500), // Genera de manera temporal un ID aleatorio para el nuevo producto
-                nombre: nombreProducto,
-                descripcion: descripcionProducto,
-                precio: parseFloat(precioProducto),
-                sku: skuProducto
-            };
-        } else {
-            nuevoProducto.id = id;
-            nuevoProducto.nombre = nombreProducto;
-            nuevoProducto.descripcion = descripcionProducto;
-            nuevoProducto.precio = parseFloat(precioProducto);
-            nuevoProducto.sku = skuProducto;
-        }
-
-        console.log('Producto con ID:', nuevoProducto);
-
-        if (!id) {
-            setProductos([...productos, nuevoProducto]);
+    const handlerAgregarProducto = async (producto) => {
+        console.log('Producto en handlerAgregarProducto:', producto);        
+        
+        Swal.fire({
+            title: 'Guardando producto...',
+            allowOutsideClick: false,
+            didOpen: () => {
+                Swal.showLoading();
+            }
+        });
+        
+        if (!producto.id) {
+            console.log('Va a entrar a crear producto');            
+            const nuevoProducto = await createProducto(producto);
+            setProductos([...productos, nuevoProducto]);                        
+            Swal.close();
             return;
         }
-
-        setProductos(productos.map(producto => producto.id === id ? nuevoProducto : producto));
-        
+        console.log('Va a entrar a actualizar producto');            
+        const productoActualizado = await updateProducto(producto);
+        setProductos(productos.map(p => p.id === producto.id ? productoActualizado : p));
+        Swal.close();                
     }
 
     const handlerEliminarProducto = (id) => {
@@ -84,10 +82,21 @@ export const ProductoApp = ({titulo='', subtitulo=''}) => {
             cancelButtonColor: '#d33',
             confirmButtonText: 'Sí, eliminarlo!',
             cancelButtonText: 'Cancelar'
-        }).then((result) => {
+        }).then(async (result) => {
             if (result.isConfirmed) {
+                
+                Swal.fire({
+                    title: 'Eliminando producto...',
+                    allowOutsideClick: false,
+                    didOpen: () => {
+                        Swal.showLoading();
+                    }
+                });
+                
+                await deleteProducto(id);
                 const productosActualizados = productos.filter(producto => producto.id !== id);
                 setProductos(productosActualizados);
+                
                 Swal.fire('¡Eliminado!',
                     'El producto ha sido eliminado.',
                     'success'
@@ -101,11 +110,6 @@ export const ProductoApp = ({titulo='', subtitulo=''}) => {
         setProductoSelected(productoSeleccionado);
         console.log('Producto seleccionado con ID:', id);
         console.log('Datos del producto seleccionado',productoSeleccionado);
-    }
-
-    const handlerEditarProducto = (id) => {
-        // Aquí puedes agregar la lógica para editar el producto en tu lista o realizar otras acciones necesarias
-        console.log('Producto a editar con ID:', id);
     }
     
     return (
